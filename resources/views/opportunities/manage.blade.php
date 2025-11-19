@@ -2,48 +2,49 @@
 
 @section('content')
     <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
             <div>
-                <h1 style="font-size: 1.6rem; font-weight: 700; margin: 0 0 0.3rem;">Manage opportunities</h1>
-                <p style="color: #475569; margin: 0;">Track your SDG-focused postings and review incoming applications.</p>
+                <h1 class="headline" style="font-size: 1.6rem; margin-bottom: 0.3rem;">Manage opportunities</h1>
+                <p class="muted-copy">Track your SDG-focused postings and review incoming applications.</p>
             </div>
             <a href="{{ route('opportunities.create') }}" class="btn-primary">Create new</a>
         </div>
-\n        @if ($opportunities->isEmpty())
-            <p style="color: #475569;">You haven&apos;t posted any opportunities yet. Start by publishing a role or event aligned with SDG 17.</p>
+
+        @if ($opportunities->isEmpty())
+            <p class="muted-copy">You haven&apos;t posted any opportunities yet. Start by publishing a role or event aligned with SDG 17.</p>
         @else
-            <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="background-color: #f1f5f9; text-align: left;">
-                            <th style="padding: 0.75rem;">Title</th>
-                            <th style="padding: 0.75rem;">Type</th>
-                            <th style="padding: 0.75rem;">Status</th>
-                            <th style="padding: 0.75rem;">Mode</th>
-                            <th style="padding: 0.75rem;">Deadline</th>
-                            <th style="padding: 0.75rem;">Applicants</th>
-                            <th style="padding: 0.75rem;">Actions</th>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse text-left text-sm text-slate-600">
+                    <thead class="bg-slate-50 text-slate-900 font-semibold">
+                        <tr>
+                            <th class="p-3">Title</th>
+                            <th class="p-3">Type</th>
+                            <th class="p-3">Status</th>
+                            <th class="p-3">Mode</th>
+                            <th class="p-3">Deadline</th>
+                            <th class="p-3">Applicants</th>
+                            <th class="p-3">Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y divide-slate-200">
                         @foreach ($opportunities as $opportunity)
-                            <tr style="border-bottom: 1px solid #e2e8f0;">
-                                <td style="padding: 0.75rem; font-weight: 600;">
-                                    <a href="{{ route('opportunities.show', $opportunity) }}" style="color: #2563eb; text-decoration: none;">{{ $opportunity->title }}</a>
+                            <tr>
+                                <td class="p-3 font-semibold text-slate-900">
+                                    <a href="{{ route('opportunities.show', $opportunity) }}" class="text-blue-600 hover:underline">{{ $opportunity->title }}</a>
                                 </td>
-                                <td style="padding: 0.75rem;">{{ ucfirst($opportunity->opportunity_type) }}</td>
-                                <td style="padding: 0.75rem;">
-                                    <span class="badge" style="background-color: rgba(37,99,235,0.1); color: #1d4ed8;">{{ ucfirst($opportunity->status) }}</span>
+                                <td class="p-3">{{ ucfirst($opportunity->opportunity_type) }}</td>
+                                <td class="p-3">
+                                    <span class="badge bg-blue-50 text-blue-700">{{ ucfirst($opportunity->status) }}</span>
                                 </td>
-                                <td style="padding: 0.75rem;">{{ ucfirst($opportunity->mode) }}</td>
-                                <td style="padding: 0.75rem;">{{ optional($opportunity->deadline)->format('M d, Y') ?? 'â€”' }}</td>
-                                <td style="padding: 0.75rem;">{{ $opportunity->applications_count }}</td>
-                                <td style="padding: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                                    <a href="{{ route('opportunities.edit', $opportunity) }}" class="btn-secondary">Edit</a>
+                                <td class="p-3">{{ ucfirst($opportunity->mode) }}</td>
+                                <td class="p-3">{{ optional($opportunity->deadline)->format('M d, Y') ?? '—' }}</td>
+                                <td class="p-3">{{ $opportunity->applications_count }}</td>
+                                <td class="p-3 flex flex-wrap gap-2">
+                                    <a href="{{ route('opportunities.edit', $opportunity) }}" class="btn-secondary text-xs py-1 px-3">Edit</a>
                                     <form method="POST" action="{{ route('opportunities.destroy', $opportunity) }}" onsubmit="return confirm('Delete this opportunity?');">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn-secondary" style="border-color: #dc2626; color: #dc2626;">Delete</button>
+                                        <button type="submit" class="btn-secondary text-xs py-1 px-3 border-red-200 text-red-600 hover:bg-red-50">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -52,7 +53,7 @@
                 </table>
             </div>
 
-            <div style="margin-top: 1rem;">
+            <div class="mt-4">
                 {{ $opportunities->links() }}
             </div>
         @endif
