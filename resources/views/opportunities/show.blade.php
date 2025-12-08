@@ -75,15 +75,21 @@
                         <div>
                             <label for="message" class="form-label">Motivation &amp; relevant experience</label>
                             <textarea id="message" name="message" rows="6" required class="form-textarea">{{ old('message', optional($existingApplication)->message) }}</textarea>
-                            @error('message')
-                                <p class="error-message">{{ $message }}</p>
-                            @enderror
-                            @error('application')
-                                <p class="error-message">{{ $message }}</p>
-                            @enderror
+                            @error('message') <p class="error-message">{{ $message }}</p> @enderror
+                            @error('application') <p class="error-message">{{ $message }}</p> @enderror
                         </div>
-                        <button type="submit" class="btn-primary justify-self-start">{{ $existingApplication ? 'Update application' : 'Submit application' }}</button>
+                        <div>
+                            <button type="submit" class="btn-primary">{{ $existingApplication ? 'Update application' : 'Submit application' }}</button>
+                        </div>
                     </form>
+
+                    @if ($existingApplication)
+                        <form method="POST" action="{{ route('applications.destroy', $existingApplication) }}" class="mt-3">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn-secondary" onclick="return confirm('Are you sure you want to withdraw your application?')">Withdraw application</button>
+                        </form>
+                    @endif
                 @endif
             </div>
         @endif

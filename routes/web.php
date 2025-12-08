@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/opportunities/{opportunity:slug}/apply', [ApplicationController::class, 'store'])->name('applications.store');
     Route::get('/dashboard/applications', [ApplicationController::class, 'index'])->name('applications.mine');
-
+    Route::delete('/dashboard/applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 

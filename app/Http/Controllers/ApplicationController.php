@@ -58,4 +58,20 @@ class ApplicationController extends Controller
             ->route('applications.mine')
             ->with('status', 'Application sent to ' . ($opportunity->owner->organization_name ?? $opportunity->owner->name) . '.');
     }
+
+    public function destroy(Request $request, Application $application): RedirectResponse
+    {
+        $user = $request->user();
+
+        if (! $user || $application->user_id !== $user->id) {
+            abort(403, 'You cannot delete this application.');
+        }
+
+        $opportunityTitle = $application->opportunity->title;
+        $application->delete();
+
+        return redirect()
+            ->route('applications.mine')
+            ->with('status', 'Application for "' . $opportunityTitle . '" has been withdrawn.');
+    }
 }

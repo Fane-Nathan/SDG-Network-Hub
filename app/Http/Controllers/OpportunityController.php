@@ -98,6 +98,7 @@ class OpportunityController extends Controller
     public function show(Request $request, Opportunity $opportunity): View
     {
         $applications = collect();
+        $existingApplication = null;
         $user = $request->user();
 
         if ($user && $user->isOrganization() && $user->id === $opportunity->user_id) {
@@ -105,11 +106,17 @@ class OpportunityController extends Controller
                 ->with('applicant')
                 ->latest()
                 ->get();
+        } elseif ($user) {
+            // Get user's existing application if they already applied
+            $existingApplication = $opportunity->applications()
+                ->where('user_id', $user->id)
+                ->first();
         }
 
         return view('opportunities.show', [
             'opportunity' => $opportunity->load('owner'),
             'applications' => $applications,
+            'existingApplication' => $existingApplication,
         ]);
     }
 

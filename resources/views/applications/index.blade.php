@@ -25,6 +25,11 @@
                                 <p class="mt-2 text-sm text-slate-500">Submitted {{ $application->created_at->format('M d, Y') }} • Status: <strong>{{ ucfirst($application->status) }}</strong></p>
                             </div>
                             <a href="{{ route('opportunities.show', $application->opportunity) }}" class="btn-primary self-start">View opportunity</a>
+                            <form method="POST" action="{{ route('applications.destroy', $application) }}" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn-secondary text-sm" onclick="return confirm('Are you sure?')">Withdraw</button>
+                            </form>
                         </div>
                         <div class="text-slate-600 whitespace-pre-line">{{ $application->message }}</div>
                     </div>
