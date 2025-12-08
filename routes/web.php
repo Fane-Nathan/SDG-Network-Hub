@@ -8,6 +8,11 @@ use App\Http\Controllers\OpportunityController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [OpportunityController::class, 'publicIndex'])->name('home');
+
+// Temporary test routes for error pages (remove in production)
+Route::get('/test-419', fn() => abort(419));
+Route::get('/test-403', fn() => abort(403));
+Route::get('/test-500', fn() => abort(500));
 Route::get('/opportunities/{opportunity:slug}', [OpportunityController::class, 'show'])->name('opportunities.show');
 
 Route::middleware('auth')->group(function () {

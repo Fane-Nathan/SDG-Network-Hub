@@ -46,7 +46,7 @@
 
         @if (session('status'))
             <div class="page-content" style="margin-bottom: 0;">
-                <div class="status-banner card card--elevated animate-fade-in-up">
+                <div class="status-banner animate-fade-in-up">
                     {{ session('status') }}
                 </div>
             </div>
