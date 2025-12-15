@@ -9,14 +9,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/build/assets/app-C_wFxlol.css">
     <script type="module" src="/build/assets/app-Bj43h_rG.js" defer></script>
+    <link rel="icon" href="/sdg-icon.jpg">
 </head>
 <body>
     <div class="page-shell">
         <header class="site-header">
             <div class="site-navbar">
-                <a href="{{ route('home') }}" class="brand">
-                    <span class="brand__title">SDG Network Hub</span>
-                    <span class="brand__subtitle">Partnering for SDG 17 through people-powered opportunities</span>
+                <a href="{{ route('home') }}" class="brand" style="display: flex !important; flex-direction: row !important; align-items: center !important; gap: 12px;">
+                    <img src="/sdg-icon.jpg" alt="SDG Network Hub Logo" style="height: 64px; width: 64px; object-fit: cover; border-radius: 50%; flex-shrink: 0;">
+                    <div class="brand__text" style="display: flex; flex-direction: column;">
+                        <span class="brand__title">SDG Network Hub</span>
+                        <span class="brand__subtitle">Partnering for SDG 17 through people-powered opportunities</span>
+                    </div>
                 </a>
                 <nav>
                     <ul class="nav-list">
