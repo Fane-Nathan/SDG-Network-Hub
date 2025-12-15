@@ -25,6 +25,10 @@
             "dest": "/public/robots.txt"
         },
         {
+            "src": "/sdg-icon.jpg",
+            "dest": "/public/sdg-icon.jpg"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
