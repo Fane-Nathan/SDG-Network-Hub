@@ -18,14 +18,15 @@ setEnvVar('SESSION_DRIVER', 'cookie');
 setEnvVar('CACHE_STORE', 'array');
 setEnvVar('QUEUE_CONNECTION', 'sync');
 
-// Database connection - use Vercel env vars or defaults
-// These ensure pgsql is used even if .env has sqlite
-if (getenv('DB_CONNECTION') === false || getenv('DB_CONNECTION') === 'sqlite') {
-    // Force pgsql if DB_HOST is set (Vercel env vars)
-    if (isset($_SERVER['DB_HOST']) && !empty($_SERVER['DB_HOST'])) {
-        setEnvVar('DB_CONNECTION', 'pgsql');
-    }
-}
+// Force PostgreSQL database connection for Neon
+// These override any .env settings
+setEnvVar('DB_CONNECTION', 'pgsql');
+setEnvVar('DB_HOST', 'ep-muddy-bread-ah8zkeoz-pooler.c-3.us-east-1.aws.neon.tech');
+setEnvVar('DB_PORT', '5432');
+setEnvVar('DB_DATABASE', 'neondb');
+setEnvVar('DB_USERNAME', 'neondb_owner');
+setEnvVar('DB_PASSWORD', 'npg_oJADg6GxR3MT');
+setEnvVar('DB_SSLMODE', 'require');
 
 // Forward the request to the Laravel entry point
 require __DIR__ . '/../public/index.php';
