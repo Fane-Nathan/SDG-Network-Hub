@@ -11,6 +11,7 @@ function setEnvVar($key, $value) {
 
 // Mark as serverless
 setEnvVar('VERCEL', '1');
+setEnvVar('APP_NAME', 'SDG Network Hub');
 
 // Serverless-compatible settings
 setEnvVar('LOG_CHANNEL', 'stderr');
